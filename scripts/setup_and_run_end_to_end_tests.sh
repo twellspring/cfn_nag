@@ -46,7 +46,7 @@ gem install rspec --explain -v '~> 3.4' --no-document
 gem install rspec -v '~> 3.4' --no-document
 gem install simplecov -v '~> 0.11' --no-document
 
-echo "begin tests..."
+echo "begin end_to_end tests..."
 # Execute end-to-end tests
 rspec -t end_to_end
 

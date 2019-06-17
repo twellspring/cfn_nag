@@ -24,6 +24,7 @@ describe CfnNag do
 
     context 'txt output' do
       it 'renders text results' do
+        Logging.logger['log'].info "////////////////////////"
         expect {
           @cfn_nag.audit_aggregate_across_files_and_render_results(
             input_path: test_template_path('json/s3_bucket_policy/s3_bucket_with_wildcards.json'),

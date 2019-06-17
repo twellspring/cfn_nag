@@ -107,6 +107,11 @@ class Options
           'Format of results: [txt, json]',
           type: :string,
           default: 'txt'
+      opt :color,
+          'Enable colored output',
+          type: :boolean,
+          required: false,
+          default: false
       opt :debug,
           'Enable debug output',
           type: :boolean,
