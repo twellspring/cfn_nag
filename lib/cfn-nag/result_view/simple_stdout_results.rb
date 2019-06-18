@@ -26,8 +26,8 @@ class SimpleStdoutResults
   end
 
   def render(results)
-    Logging.logger['log'].info "in render"
-    Logging.logger['log'].info @options.inspect
+    # Logging.logger['log'].info 'in render'
+    # Logging.logger['log'].info @options.inspect
 
     results.each do |result|
       60.times { print '-' }
