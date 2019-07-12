@@ -7,7 +7,7 @@ require 'net/http'
 GITHUB_API_HOST = 'api.github.com'
 REQUEST_PATH = "/repos/#{ENV['CIRCLE_PROJECT_USERNAME']}"\
                "/#{ENV['CIRCLE_PROJECT_REPONAME']}"\
-               "/pulls/#{ENV['CIRCLE_PULL_REQUEST'].split('/'.last)}"
+               "/pulls/#{ENV['CIRCLE_PULL_REQUEST'].split('/').last}"
 puts REQUEST_PATH
 
 
