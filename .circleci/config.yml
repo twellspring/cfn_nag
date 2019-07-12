@@ -1,6 +1,13 @@
 version: 2.1
 
+orbs:
+  validate-title: qventus/validate-title@0.0.3
+
 jobs:
+  validate_pr:
+    steps:
+      - validate-title/validate
+          regex: "^/#[0-9]+/"
   pr_title_validations:
     docker:
       - image: circleci/ruby:2.5.5-browsers
@@ -54,17 +61,13 @@ jobs:
           name: Publish gem
           command: bash ./scripts/publish.sh
 
-orbs:
-  validate-title: qventus/validate-title@0.0.3
-
 workflows:
   version: 2.1
   test-and-publish:
     jobs:
-      - validate-title/validate
-          regex: "^/#[0-9]+/"
-      - unit_test
-      - end_to_end_test
+      - validate_pr
+      # - unit_test
+      # # - end_to_end_test
       # - publish:
       #     requires:
       #       - unit_test
