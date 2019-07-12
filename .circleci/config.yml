@@ -1,10 +1,20 @@
 version: 2
 jobs:
+  pr_title_validations:
+    docker:
+      - image: circleci/ruby:2.5.5-browsers
+    steps:
+      - run:
+          name: validate PR name starts with issue fixed (ex. #234)     
+          command: bash ./scripts/check_pr_name.sh
   unit_test:
     docker:
       - image: circleci/ruby:2.5.5-browsers
     steps:
       - checkout
+      - run:
+          name: validate PR name starts with issue fixed (ex. #234)     
+          command: bash ./scripts/check_pr_name.sh
       - run:
           name: Which bundler?
           command: bundle -v
@@ -46,12 +56,13 @@ workflows:
   version: 2
   test-and-publish:
     jobs:
+      - pr_title_validations
       - unit_test
       - end_to_end_test
-      - publish:
-          requires:
-            - unit_test
-            #- end_to_end_test
-          filters:
-            branches:
-              only: master
+      # - publish:
+      #     requires:
+      #       - unit_test
+      #       #- end_to_end_test
+      #     filters:
+      #       branches:
+      #         only: master
