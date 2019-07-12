@@ -1,4 +1,5 @@
-version: 2
+version: 2.1
+
 jobs:
   pr_title_validations:
     docker:
@@ -53,11 +54,15 @@ jobs:
           name: Publish gem
           command: bash ./scripts/publish.sh
 
+orbs:
+  validate-title: qventus/validate-title@0.0.3
+
 workflows:
-  version: 2
+  version: 2.1
   test-and-publish:
     jobs:
-      - pr_title_validations
+      - validate-title/validate
+          regex: "^/#[0-9]+/"
       - unit_test
       - end_to_end_test
       # - publish:
