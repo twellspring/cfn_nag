@@ -58,7 +58,7 @@ workflows:
   version: 2
   test-and-publish:
     jobs:
-      - validate_pr
+      - pr_title_validations
       # - unit_test
       # - end_to_end_test
       # - publish:
