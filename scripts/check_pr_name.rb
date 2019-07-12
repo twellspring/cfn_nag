@@ -5,7 +5,7 @@ require 'net/http'
 
 # REMOVE AFTER DONE TESTING
 puts "TOKEN #{ENV['GITHUB_API_TOKEN']}"
-puts "PR #{ENV['CIRCLE_PULL_REQUEST']"
+puts "PR #{ENV['CIRCLE_PULL_REQUEST']}"
 
 # ENV['CIRCLE_PULL_REQUEST'] = 'https://github.com/stelligent/cfn_nag/pull/243'
 GITHUB_API_HOST = 'api.github.com'
