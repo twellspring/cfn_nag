@@ -7,7 +7,9 @@ require 'net/http'
 GITHUB_API_HOST = 'api.github.com'
 REQUEST_PATH = "/repos/#{ENV['CIRCLE_PROJECT_USERNAME']}"\
                "/#{ENV['CIRCLE_PROJECT_REPONAME']}"\
-               "/pulls/#{ENV['CIRCLE_PR_NUMBER']}"
+               "/pulls/#{ENV['CIRCLE_PULL_REQUEST'].split('/').last}"
+puts REQUEST_PATH
+
 
 def http_connection
   http = Net::HTTP.new(GITHUB_API_HOST, 443)
