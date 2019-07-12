@@ -6,7 +6,7 @@ orbs:
 jobs:
   validate_pr:
     steps:
-      - validate-title/validate
+      - validate-title/validate:
           regex: "^/#[0-9]+/"
   pr_title_validations:
     docker:
