@@ -5,11 +5,16 @@ require 'net/http'
 
 # ENV['CIRCLE_PULL_REQUEST'] = 'https://github.com/stelligent/cfn_nag/pull/243'
 GITHUB_API_HOST = 'api.github.com'
-REQUEST_PATH = "/repos/#{ENV['CIRCLE_PROJECT_USERNAME']}"\
-               "/#{ENV['CIRCLE_PROJECT_REPONAME']}"\
-               "/pulls/#{ENV['CIRCLE_PULL_REQUEST'].split('/').last}"
-puts REQUEST_PATH
 
+def validate_env_variables
+  if ENV['CIRCLE_PULL_REQUEST'].nil?
+    puts "No PR associated with this commit"
+    exit(0)
+  end
+  if ENV['GITHUB_API_TOKEN'].nil?
+    abort("GITHUB_API_TOKEN not found")
+  end
+end
 
 def http_connection
   http = Net::HTTP.new(GITHUB_API_HOST, 443)
@@ -20,7 +25,10 @@ end
 
 def github_pr_title
   begin
-    request = Net::HTTP::Get.new(REQUEST_PATH)
+    request_path = "/repos/#{ENV['CIRCLE_PROJECT_USERNAME']}"\
+               "/#{ENV['CIRCLE_PROJECT_REPONAME']}"\
+               "/pulls/#{ENV['CIRCLE_PULL_REQUEST'].split('/').last}"
+    request = Net::HTTP::Get.new(request_path)
     request['Authorization'] = "token #{ENV['GITHUB_API_TOKEN']}"
     response = http_connection.request(request)
   rescue StandardError => error
@@ -34,6 +42,8 @@ def github_pr_title
   end
 end
 
+
+validate_env_variables 
 pr_title = github_pr_title
 unless pr_title.match(/#[0-9]+/)
   abort("ERROR: PR Title '#{pr_title}' needs to start with a issue number (example: #123 )")
