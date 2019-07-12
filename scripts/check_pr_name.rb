@@ -8,8 +8,8 @@ GITHUB_API_HOST = 'api.github.com'
 REQUEST_PATH = "/repos/#{ENV['CIRCLE_PROJECT_USERNAME']}"\
                "/#{ENV['CIRCLE_PROJECT_REPONAME']}"\
                "/pulls/#{ENV['CIRCLE_PULL_REQUEST'].split('/').last}"
-puts REQUEST_PATH
-
+puts "PR #{ENV['CIRCLE_PULL_REQUEST']}"
+exit(0)
 
 def http_connection
   http = Net::HTTP.new(GITHUB_API_HOST, 443)
