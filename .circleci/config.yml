@@ -58,10 +58,10 @@ workflows:
     jobs:
       - unit_test
       - end_to_end_test
-      - publish:
-          requires:
-            - unit_test
-            #- end_to_end_test
-          filters:
-            branches:
-              only: master
+      # - publish:
+      #     requires:
+      #       - unit_test
+      #       #- end_to_end_test
+      #     filters:
+      #       branches:
+      #         only: master
