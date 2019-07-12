@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.5.5-browsers
     steps:
+      - checkout
       - run:
           name: validate PR name starts with issue fixed (ex. #234)     
           command: bash ./scripts/check_pr_name.sh
