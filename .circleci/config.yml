@@ -1,13 +1,4 @@
-# orbs:
-#   validate-title: qventus/validate-title@volatile
-# version: 2.1
-# workflows:
-#   build:
-#     jobs:
-#       - validate-title/validate
-
-
-version: 2.1
+version: 2
 
 jobs:
   pr_title_validations:
@@ -64,13 +55,12 @@ jobs:
           command: bash ./scripts/publish.sh
 
 workflows:
-  version: 2.1
+  version: 2
   test-and-publish:
     jobs:
-      - pr_title_validations
-      # - validate_pr
+      - validate_pr
       # - unit_test
-      # # - end_to_end_test
+      # - end_to_end_test
       # - publish:
       #     requires:
       #       - unit_test
