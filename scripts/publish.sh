@@ -82,6 +82,12 @@ if [ $tagged_commit = 0 ]; then
   git push --tags
 fi
 
+# Update Changelog
+auto-changelog --template changelog-template.hbs
+git add CHANGELOG.md
+git commit -m "Update Changelog [skip ci]"
+git push
+
 # gemspec respects GEM_VERSION envvar
 gem build cfn-nag.gemspec
 gem push cfn-nag-${GEM_VERSION}.gem
