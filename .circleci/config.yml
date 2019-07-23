@@ -3,7 +3,7 @@ version: 2
 jobs:
   pr_title_validations:
     docker:
-      - image: circleci/ruby:2.5.5-browsers
+      - image: circleci/ruby:2.5.5-node-browsers
     steps:
       - checkout
       - run:
@@ -11,7 +11,7 @@ jobs:
           command: ruby ./scripts/check_pr_name.rb
   unit_test:
     docker:
-      - image: circleci/ruby:2.5.5-browsers
+      - image: circleci/ruby:2.5.5-node-browsers
     steps:
       - checkout
       - run:
@@ -34,7 +34,7 @@ jobs:
           command: bundle exec ./bin/cfn_nag_rules
   end_to_end_test:
     docker:
-      - image: circleci/ruby:2.5.5-browsers
+      - image: circleci/ruby:2.5.5-node-browsers
     steps:
       - checkout
       - run:
@@ -42,12 +42,15 @@ jobs:
           command: bash ./scripts/setup_and_run_end_to_end_tests.sh
   publish:
     docker:
-      - image: circleci/ruby:2.5.5-browsers
+      - image: circleci/ruby:2.5.5-node-browsers
     steps:
       - checkout
       - run:
           name: Bundle install
           command: bundle check || bundle install
+      - run:
+          name: Auto-changelog install
+          command: npm install -g auto-changelog
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
@@ -58,13 +61,12 @@ workflows:
   version: 2
   test-and-publish:
     jobs:
-      - validate_pr
-      # - unit_test
-      # - end_to_end_test
-      # - publish:
-      #     requires:
-      #       - unit_test
-      #       #- end_to_end_test
-      #     filters:
-      #       branches:
-      #         only: master
+      - unit_test
+      - end_to_end_test
+      - publish:
+          requires:
+            - unit_test
+            #- end_to_end_test
+          filters:
+            branches:
+              only: master

@@ -1,13 +1,13 @@
 {{#each releases}}
-### [{{title}}]({{href}})
-> {{niceDate}}
+### [{{title}}]({{href}}) ({{niceDate}})
 {{#if merges}}
 {{#each merges}}
-- {{message}} (PR #[{{id}}]({{href}}))
+- M {{message}} (PR #[{{id}}]({{href}}))
 {{/each}}
-{{/if}}
+{{else}}
 {{#commit-list commits heading=''}}
 - C {{subject}}
 {{/commit-list}}
+{{/if}}
 
 {{/each}}
