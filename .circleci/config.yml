@@ -47,7 +47,7 @@ jobs:
           command: bundle check || bundle install
       - run:
           name: Auto-changelog install
-          command: npm install -g auto-changelog
+          command: npm install auto-changelog
       - setup_remote_docker:
           docker_layer_caching: true
       - run:

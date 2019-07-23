@@ -83,7 +83,7 @@ if [ $tagged_commit = 0 ]; then
 fi
 
 # Update Changelog
-auto-changelog --template changelog-template.hbs
+node node_modules/auto-changelog/lib/index.js --template changelog-template.hbs
 git add CHANGELOG.md
 git commit -m "Update Changelog [skip ci]"
 git push
