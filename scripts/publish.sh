@@ -1,33 +1,33 @@
 #!/bin/bash -ex
 set -o pipefail
 
-set +x
-if [[ -z ${rubygems_api_key} ]];
-then
-  echo rubygems_api_key must be set in the environment
-  exit 1
-fi
-if [[ -z ${docker_user} ]];
-then
-  echo docker_user must be set in the environment
-  exit 1
-fi
-if [[ -z ${docker_password} ]];
-then
-  echo docker_password must be set in the environment
-  exit 1
-fi
-set -x
+# set +x
+# if [[ -z ${rubygems_api_key} ]];
+# then
+#   echo rubygems_api_key must be set in the environment
+#   exit 1
+# fi
+# if [[ -z ${docker_user} ]];
+# then
+#   echo docker_user must be set in the environment
+#   exit 1
+# fi
+# if [[ -z ${docker_password} ]];
+# then
+#   echo docker_password must be set in the environment
+#   exit 1
+# fi
+# set -x
 
 git config --global user.email "build@build.com"
 git config --global user.name "build"
 
-mkdir -p ~/.gem
+# mkdir -p ~/.gem
 
-set +ex
-echo :rubygems_api_key: ${rubygems_api_key} > ~/.gem/credentials
-set -ex
-chmod 0600 ~/.gem/credentials
+# set +ex
+# echo :rubygems_api_key: ${rubygems_api_key} > ~/.gem/credentials
+# set -ex
+# chmod 0600 ~/.gem/credentials
 
 # git describe returns the latest tag
 current_tag=$(git describe)
