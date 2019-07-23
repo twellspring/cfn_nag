@@ -15,9 +15,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: validate PR name starts with issue fixed (ex. #234)     
-          command: bash ./scripts/check_pr_name.sh
-      - run:
           name: Which bundler?
           command: bundle -v
       - run:
