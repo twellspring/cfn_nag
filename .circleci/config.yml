@@ -39,7 +39,7 @@ jobs:
           command: export X=1	
       - run:
           name: get ENV
-          command: echo $X
+          command: echo "ENV X = ${X}"
       - run:
           name: Bundle install
           command: bundle check || bundle install
