@@ -1,14 +1,6 @@
 version: 2
 
 jobs:
-  pr_title_validations:
-    docker:
-      - image: circleci/ruby:2.5.5-node-browsers
-    steps:
-      - checkout
-      - run:
-          name: validate PR name starts with issue fixed (ex. #234)     
-          command: ruby ./scripts/check_pr_name.rb
   unit_test:
     docker:
       - image: circleci/ruby:2.5.5-node-browsers
@@ -43,6 +35,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Set ENV
+          command: export X=1	
+      - run:
+          name: get ENV
+          command: echo $X
+      - run:
           name: Bundle install
           command: bundle check || bundle install
       - run:
@@ -50,9 +48,9 @@ jobs:
           command: npm install auto-changelog
       - setup_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Publish gem
-          command: bash ./scripts/publish.sh
+#      - run:
+#          name: Publish gem
+#          command: bash ./scripts/publish.sh
 
 workflows:
   version: 2
