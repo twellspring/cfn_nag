@@ -35,6 +35,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Get Shell
+          command: echo $0
+      - run:
           name: Set ENV
           command: export X=1	
       - run:
